@@ -32,6 +32,7 @@ public class UserResource {
 	@Autowired
     private UserRepository repo;
 	
+	//lista todos os usuários
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll() {
 		List<User> list = service.findAll();
@@ -39,12 +40,14 @@ public class UserResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	//lista usuários por id
 	@GetMapping(value="/{id}")
 	public ResponseEntity<UserDTO> findAll(@PathVariable String id) {
 		User obj = service.findById(id);
 		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
 	
+	//aiciona novo usuário
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody UserDTO objDto) {
 		User obj = service.fromDTO(objDto);
@@ -53,12 +56,14 @@ public class UserResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	//deleta usuário
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	//edita usuário
 	@PutMapping(value="/{id}")
 	public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
 		User obj = service.fromDTO(objDto);
@@ -67,8 +72,9 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	//retorna posts de um usuário
 	@GetMapping(value="/{id}/posts")
-	public ResponseEntity<List<Post>> findPosys(@PathVariable String id) {
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
 		User obj = service.findById(id);
 		return ResponseEntity.ok().body(obj.getPosts());
 	}
