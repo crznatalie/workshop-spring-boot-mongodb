@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nelioalves.workshopmongo.domain.Post;
-import com.nelioalves.workshopmongo.repository.PostRepository;
 import com.nelioalves.workshopmongo.services.PostService;
 
 @RestController
@@ -17,9 +16,6 @@ public class PostResource {
 
 	@Autowired
 	private PostService service;
-
-	@Autowired
-	private PostRepository repo;
 
 	// lista posts por id
 	@GetMapping(value = "/{id}")
